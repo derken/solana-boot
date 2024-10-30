@@ -8,8 +8,8 @@
 # ARG_OPTIONAL_SINGLE([snapshots-path],[],[Solana client snapshots path],[/mnt/solana/snapshots])
 # ARG_OPTIONAL_SINGLE([accounts-path],[],[Solana client snapshots path],[/mnt/solana/accounts])
 # ARG_OPTIONAL_SINGLE([log-level],[],[Solana client log level],[WARN])
-# ARG_OPTIONAL_SINGLE([ramdisk-size-gb],[],[Solana client ram disk size],[200])
-# ARG_OPTIONAL_SINGLE([swap-file-size-gb],[],[Solana client swap file size],[128])
+# ARG_OPTIONAL_SINGLE([ramdisk-size-gb],[],[Solana client ram disk size],[400])
+# ARG_OPTIONAL_SINGLE([swap-file-size-gb],[],[Solana client swap file size],[512])
 # ARG_OPTIONAL_SINGLE([secrets-path],[],[Solana client secrets path],[/home/solana/.secrets])
 # ARG_OPTIONAL_SINGLE([solana-user],[],[Solana client user],[solana])
 # ARG_OPTIONAL_SINGLE([solana-version],[],[Solana client version],[1.13.6])
@@ -53,11 +53,11 @@ _arg_ledger_path="/mnt/solana/ledger"
 _arg_snapshots_path="/mnt/solana/snapshots"
 _arg_accounts_path="/mnt/solana/accounts"
 _arg_log_level="WARN"
-_arg_ramdisk_size_gb="200"
-_arg_swap_file_size_gb="128"
+_arg_ramdisk_size_gb="400"
+_arg_swap_file_size_gb="512"
 _arg_secrets_path="/home/solana/.secrets"
 _arg_solana_user="solana"
-_arg_solana_version="1.18.22"
+_arg_solana_version="1.18.26"
 _arg_use_ramdisk_for_account="True"
 _arg_jito_enable="False"
 _arg_jito_block_engine_url=
@@ -78,11 +78,11 @@ print_help()
 	printf '\t%s\n' "--snapshots-path: Solana client snapshots path (default: '/mnt/solana/snapshots')"
 	printf '\t%s\n' "--accounts-path: Solana client snapshots path (default: '/mnt/solana/accounts')"
 	printf '\t%s\n' "--log-level: Solana client log level (default: 'WARN')"
-	printf '\t%s\n' "--ramdisk-size-gb: Solana client ram disk size (default: '200')"
-	printf '\t%s\n' "--swap-file-size-gb: Solana client swap file size (default: '128')"
+	printf '\t%s\n' "--ramdisk-size-gb: Solana client ram disk size (default: '400')"
+	printf '\t%s\n' "--swap-file-size-gb: Solana client swap file size (default: '512')"
 	printf '\t%s\n' "--secrets-path: Solana client secrets path (default: '/home/solana/.secrets')"
 	printf '\t%s\n' "--solana-user: Solana client user (default: 'solana')"
-	printf '\t%s\n' "--solana-version: Solana client version (default: '1.13.6')"
+	printf '\t%s\n' "--solana-version: Solana client version (default: '1.18.26')"
 	printf '\t%s\n' "--use-ramdisk-for-account: Put accounts in ramdisk (default: 'True')"
 	printf '\t%s\n' "--jito-enable: Enable Jito configuration (default: 'False')"
 	printf '\t%s\n' "--jito-block-engine-url: Jito block engine URL (no default)"
