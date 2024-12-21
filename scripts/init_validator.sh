@@ -48,6 +48,7 @@ begins_with_short_option()
 }
 
 # THE DEFAULTS INITIALIZATION - OPTIONALS
+_arg_vote_account_pubkey="AiDoLYTz5CVN3ZLzqDWRtaGUaHGzDnWMeC6KCNYJPqFX"
 _arg_cluster="mainnet-beta"
 _arg_ledger_path="/mnt/solana/ledger"
 _arg_snapshots_path="/mnt/solana/snapshots"
@@ -289,6 +290,7 @@ init_validator () {
     --inventory ./playbooks/inventory/"$_arg_cluster".yaml \
     --limit localhost  playbooks/bootstrap_validator.yaml \
     --extra-vars "{ \
+    'vote_account_pubkey': $_arg_vote_account_pubkey, \
     'ledger_path': $_arg_ledger_path, \
     'log_level': $_arg_log_level, \
     'ramdisk_size_gb': $_arg_ramdisk_size_gb, \
