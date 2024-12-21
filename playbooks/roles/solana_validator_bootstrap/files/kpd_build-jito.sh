@@ -14,7 +14,7 @@ if git tag --list | grep "$TAG"; then
   CI_COMMIT=$(git rev-parse HEAD) scripts/cargo-install-all.sh --validator-only ~/.local/share/solana/install/releases/"$TAG"
   echo "updating symlinks for active_release..."
   rm -rf "$HOME"/.local/share/solana/install/active_release
-  ln -sf /home/sol/.local/share/solana/install/releases/"$TAG" "$HOME"/.local/share/solana/install/active_release
+  ln -sf /home/solana/.local/share/solana/install/releases/"$TAG" "$HOME"/.local/share/solana/install/active_release
 fi
 
 popd >/dev/null
