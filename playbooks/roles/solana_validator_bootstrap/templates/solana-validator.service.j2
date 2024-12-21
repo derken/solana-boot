@@ -17,6 +17,8 @@ Environment="RELAYER_URL={{ jito_relayer_url }}"
 Environment="SHRED_RECEIVER_ADDR={{ jito_receiver_addr }}"
 {% endif %}
 ExecStart={{ env_path }}/agave-validator \
+--full-snapshot-interval-slots 25000 \
+--snapshot-interval-slots 1000 \
 --identity {{ secrets_path }}/validator-keypair.json \
 --vote-account {{ vote_account_pubkey }} \
 --rpc-port {{ solana_rpc_port }} \
