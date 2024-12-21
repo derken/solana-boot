@@ -141,4 +141,4 @@ rm -rf "$HOME"/.local/share/solana/install/active_release
 
 ln -sf /home/solana/.local/share/solana/install/releases/"$TAG" "$HOME"/.local/share/solana/install/active_release
 
-rm -rf "$HOME"/jito-solana
+#rm -rf "$HOME"/jito-solana

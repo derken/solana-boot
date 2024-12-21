@@ -20,7 +20,7 @@
   tags:
     - copy.scripts
 
-- name: Create Jito build script
+- name: Create Jito upgrade build script
   copy:
     src: kpd_build-jito.sh
     dest: /home/solana/kpd_build-jito.sh
