@@ -2,6 +2,8 @@
 
 TAG="${1:-v2.0.15-jito}"
 echo "TAG=$TAG"
+source "$HOME/.cargo/env"
+
 pushd jito-solana > /dev/null
 
 git fetch
