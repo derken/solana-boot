@@ -10,7 +10,7 @@ RestartSec=1
 User={{ solana_user }}
 LimitNOFILE=1024000
 Environment="PATH=/bin:/usr/bin:{{ env_path }}"
-Environment="SOLANA_METRICS_CONFIG=host={{ solana_metrics_url }}"
+#Environment="SOLANA_METRICS_CONFIG=host={{ solana_metrics_url }}"
 {% if jito_enable %}
 Environment="BLOCK_ENGINE_URL={{ jito_block_engine_url }}"
 Environment="RELAYER_URL={{ jito_relayer_url }}"
