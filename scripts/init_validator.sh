@@ -54,7 +54,7 @@ _arg_ledger_path="/mnt/solana/ledger"
 _arg_snapshots_path="/mnt/solana/snapshots"
 _arg_accounts_path="/mnt/solana/accounts"
 _arg_log_level="WARN"
-_arg_ramdisk_size_gb="400"
+_arg_ramdisk_size_gb="420"
 _arg_swap_file_size_gb="512"
 _arg_secrets_path="/home/solana/.secrets"
 _arg_solana_user="solana"
@@ -64,9 +64,9 @@ _arg_jito_enable="True"
 _arg_jito_block_engine_url=
 _arg_jito_relayer_url=
 _arg_jito_receiver_addr=
-_arg_jito_tip_payment_program_pubkey=
-_arg_jito_distribution_program_pubkey=
-_arg_jito_merkle_root_upload_authority=
+_arg_jito_tip_payment_program_pubkey="T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt"
+_arg_jito_distribution_program_pubkey="4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7"
+_arg_jito_merkle_root_upload_authority="GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib"
 _arg_jito_commission_bps="0"
 
 
@@ -74,25 +74,25 @@ print_help()
 {
 	printf '%s\n' "The general script's help msg"
 	printf 'Usage: %s [-c|--cluster <arg>] [-l|--ledger-path <arg>] [--snapshots-path <arg>] [--accounts-path <arg>] [--log-level <arg>] [--ramdisk-size-gb <arg>] [--swap-file-size-gb <arg>] [--secrets-path <arg>] [--solana-user <arg>] [--solana-version <arg>] [--use-ramdisk-for-account <arg>] [--jito-enable <arg>] [--jito-block-engine-url <arg>] [--jito-relayer-url <arg>] [--jito-receiver-addr <arg>] [--jito-tip-payment-program-pubkey <arg>] [--jito-distribution-program-pubkey <arg>] [--jito-merkle-root-upload-authority <arg>] [--jito-commission-bps <arg>] [-h|--help]\n' "$0"
-	printf '\t%s\n' "-c, --cluster: Solana cluster (default: 'mainnet-beta')"
-	printf '\t%s\n' "-l, --ledger-path: Solana client ledger path (default: '/mnt/solana/ledger')"
-	printf '\t%s\n' "--snapshots-path: Solana client snapshots path (default: '/mnt/solana/snapshots')"
-	printf '\t%s\n' "--accounts-path: Solana client snapshots path (default: '/mnt/solana/accounts')"
-	printf '\t%s\n' "--log-level: Solana client log level (default: 'WARN')"
-	printf '\t%s\n' "--ramdisk-size-gb: Solana client ram disk size (default: '400')"
-	printf '\t%s\n' "--swap-file-size-gb: Solana client swap file size (default: '512')"
-	printf '\t%s\n' "--secrets-path: Solana client secrets path (default: '/home/solana/.secrets')"
-	printf '\t%s\n' "--solana-user: Solana client user (default: 'solana')"
-	printf '\t%s\n' "--solana-version: Solana client version (default: '1.18.26')"
-	printf '\t%s\n' "--use-ramdisk-for-account: Put accounts in ramdisk (default: 'True')"
-	printf '\t%s\n' "--jito-enable: Enable Jito configuration (default: 'False')"
+	printf '\t%s\n' "-c, --cluster: Solana cluster (default: '$_arg_cluster')"
+	printf '\t%s\n' "-l, --ledger-path: Solana client ledger path (default: '$_arg_ledger_path')"
+	printf '\t%s\n' "--snapshots-path: Solana client snapshots path (default: '$_arg_snapshots_path')"
+#	printf '\t%s\n' "--accounts-path: Solana client snapshots path (default: '$_arg_accounts_path')" # computed based on --use-ramdisk-for-account
+	printf '\t%s\n' "--log-level: Solana client log level (default: '$_arg_log_level')"
+	printf '\t%s\n' "--ramdisk-size-gb: Solana client ram disk size (default: '$_arg_ramdisk_size_gb')"
+	printf '\t%s\n' "--swap-file-size-gb: Solana client swap file size (default: '$_arg_swap_file_size_gb')"
+	printf '\t%s\n' "--secrets-path: Solana client secrets path (default: '$_arg_secrets_path')"
+	printf '\t%s\n' "--solana-user: Solana client user (default: '$_arg_solana_user')"
+	printf '\t%s\n' "--solana-version: Solana client version (default: '$_arg_solana_version')"
+	printf '\t%s\n' "--use-ramdisk-for-account: Put accounts in ramdisk (default: '$_arg_use_ramdisk_for_account')"
+	printf '\t%s\n' "--jito-enable: Enable Jito configuration (default: '$_arg_jito_enable')"
 	printf '\t%s\n' "--jito-block-engine-url: Jito block engine URL (no default)"
 	printf '\t%s\n' "--jito-relayer-url: Jito relayer URL (no default)"
 	printf '\t%s\n' "--jito-receiver-addr: Jito reciver address (no default)"
-	printf '\t%s\n' "--jito-tip-payment-program-pubkey: Jito tip payment program pubkey (no default)"
-	printf '\t%s\n' "--jito-distribution-program-pubkey: Jito distribution program pubkey (no default)"
-	printf '\t%s\n' "--jito-merkle-root-upload-authority: Jito merkle root upload authority (no default)"
-	printf '\t%s\n' "--jito-commission-bps: Jito commission bps (default: '0')"
+	printf '\t%s\n' "--jito-tip-payment-program-pubkey: Jito tip payment program pubkey (default: '$_arg_jito_tip_payment_program_pubkey')"
+	printf '\t%s\n' "--jito-distribution-program-pubkey: Jito distribution program pubkey (default: '$_arg_jito_distribution_program_pubkey')"
+	printf '\t%s\n' "--jito-merkle-root-upload-authority: Jito merkle root upload authority (default: '$_arg_jito_merkle_root_upload_authority')"
+	printf '\t%s\n' "--jito-commission-bps: Jito commission bps (default: '$_arg_jito_commission_bps')"
 	printf '\t%s\n' "-h, --help: Prints help"
 }
 
