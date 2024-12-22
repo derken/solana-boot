@@ -22,5 +22,15 @@
       - ufw
       - rsyslog
       - update-motd
+      - btop
+      - smartmontools
+      - net-tools
+      - cmake
+      - clang
+      - libssl-dev
+      - pkg-config
+      - llvm
+      - libprotobuf-dev
+      - protobuf-compiler
   tags:
     - config.packages
