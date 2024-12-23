@@ -59,10 +59,10 @@ ln -sf {{ secrets_path }}/unfunded-validator-keypair.json {{ secrets_path }}/val
 scp {{ ledger_path }}/tower-1_9-"$(solana-keygen pubkey {{ secrets_path }}/funded-validator-keypair.json)".bin $TRANSITIONAL_NODE_SOLANA_USER@$TRANSITIONAL_NODE_IP:$TRANSITIONAL_NODE_LEDGER_DIR
 
 # start voting operation in the transitioned node
-ssh $transitional_node_solana_user@$transitional_node_ip "$transitional_node_solana_path/agave-validator -l $transitional_node_ledger_dir set-identity --require-tower $transitional_node_funded_validator_keypair_file"
+ssh $TRANSITIONAL_NODE_SOLANA_USER@$TRANSITIONAL_NODE_IP "$TRANSITIONAL_NODE_SOLANA_PATH/agave-validator -l $TRANSITIONAL_NODE_LEDGER_DIR set-identity --require-tower $TRANSITIONAL_NODE_FUNDED_VALIDATOR_KEYPAIR_FILE"
 
 # start voting operation in the transitioned node
-ssh $transitional_node_solana_user@$transitional_node_ip "$transitional_node_solana_path/agave-validator -l $transitional_node_ledger_dir authorized-voter add $transitional_node_funded_validator_keypair_file"
+ssh $TRANSITIONAL_NODE_SOLANA_USER@$TRANSITIONAL_NODE_IP "$TRANSITIONAL_NODE_SOLANA_PATH/agave-validator -l $TRANSITIONAL_NODE_LEDGER_DIR authorized-voter add $TRANSITIONAL_NODE_FUNDED_VALIDATOR_KEYPAIR_FILE"
 
 # Move symlink to funded validator keypair to permit vote operation in case of service restart
 ssh $TRANSITIONAL_NODE_SOLANA_USER@$TRANSITIONAL_NODE_IP "ln -sf $TRANSITIONAL_NODE_FUNDED_VALIDATOR_KEYPAIR_FILE $TRANSITIONAL_NODE_SECRET_DIR/validator-keypair.json"
