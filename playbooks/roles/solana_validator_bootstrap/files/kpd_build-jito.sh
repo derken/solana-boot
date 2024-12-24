@@ -1,8 +1,42 @@
 #!/bin/bash
 
-TAG="${1:-v2.0.15-jito}"
+TAG="${1:-v2.0.19-jito}"
 echo "TAG=$TAG"
+
+echo Check if required packages are installed.
+
+packages=("libssl-dev" "libudev-dev" "pkg-config" "zlib1g-dev" "llvm" "clang" "cmake" "make" "libprotobuf-dev" "protobuf-compiler")
+missing_packages=()
+
+for package in "${packages[@]}"
+do
+    if dpkg -s "$package" >/dev/null 2>&1; then
+        echo "$package is installed."
+    else
+        missing_packages+=($package)
+    fi
+done
+
+# shellcheck disable=SC2128
+[ "${#missing_packages[@]}" -ne 0 ] && {
+    echo ERROR: following packages are missing "${missing_packages[@]}";
+    echo hint: sudo apt install -y "${missing_packages[@]}"
+    exit 1;
+  }
+
+if ! command -v cargo &> /dev/null
+then
+  curl https://sh.rustup.rs -sSf | sh
+fi
+
 source "$HOME/.cargo/env"
+
+rustup component add rustfmt
+
+rustup update
+
+
+[ -d jito-solana ] || git clone https://github.com/jito-foundation/jito-solana.git --recurse-submodules
 
 pushd jito-solana > /dev/null
 
@@ -15,6 +49,8 @@ if git tag --list | grep "$TAG"; then
   echo "updating symlinks for active_release..."
   rm -rf "$HOME"/.local/share/solana/install/active_release
   ln -sf /home/solana/.local/share/solana/install/releases/"$TAG" "$HOME"/.local/share/solana/install/active_release
+else
+  echo "invalid git tag: $TAG  hint: git tag|grep jito"
 fi
 
 popd >/dev/null
