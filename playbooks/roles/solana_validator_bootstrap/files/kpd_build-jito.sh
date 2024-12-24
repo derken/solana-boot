@@ -24,12 +24,13 @@ done
     exit 1;
   }
 
+[ -f "$HOME"/.cargo/env ] && source "$HOME/.cargo/env"
+
 if ! command -v cargo &> /dev/null
 then
   curl https://sh.rustup.rs -sSf | sh
+  source "$HOME/.cargo/env"
 fi
-
-source "$HOME/.cargo/env"
 
 rustup component add rustfmt
 
