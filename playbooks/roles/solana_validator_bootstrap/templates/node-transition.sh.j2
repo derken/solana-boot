@@ -15,7 +15,7 @@ TRANSITIONAL_NODE_SOLANA_PATH={{ env_path }}
 
 # Validate that ssh connectivity is correctly setup before running transition operation
 ssh -q -o BatchMode=yes  -o StrictHostKeyChecking=no -o ConnectTimeout=5 $TRANSITIONAL_NODE_SOLANA_USER@$TRANSITIONAL_NODE_IP 'exit 0'
-[ $? != 0 ] && { echo "SSH connection to $server over port 22 is not possible"; exit 1; }
+[ $? != 0 ] && { echo "SSH connection to $TRANSITIONAL_NODE_IP over port 22 is not possible"; exit 1; }
 
 # Check if TRANSITIONAL_NODE_LEDGER_DIR exists
 ssh $TRANSITIONAL_NODE_SOLANA_USER@$TRANSITIONAL_NODE_IP "ls $TRANSITIONAL_NODE_LEDGER_DIR" > /dev/null 2>&1
