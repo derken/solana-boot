@@ -51,7 +51,7 @@ if git tag --list | grep "$TAG"; then
   rm -rf "$HOME"/.local/share/solana/install/active_release
   ln -sf /home/solana/.local/share/solana/install/releases/"$TAG" "$HOME"/.local/share/solana/install/active_release
 else
-  echo "invalid git tag: $TAG  hint: git tag|grep jito"
+  echo "invalid git tag: $TAG  hint: git tag|grep jito|sort -V"
 fi
 
 popd >/dev/null
