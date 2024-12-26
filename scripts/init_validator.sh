@@ -6,7 +6,7 @@
 # ARG_OPTIONAL_SINGLE([cluster],[c],[Solana cluster],[mainnet-beta])
 # ARG_OPTIONAL_SINGLE([ledger-path],[l],[Solana client ledger path],[/mnt/solana/ledger])
 # ARG_OPTIONAL_SINGLE([snapshots-path],[],[Solana client snapshots path],[/mnt/solana/snapshots])
-# ARG_OPTIONAL_SINGLE([accounts-path],[],[Solana client snapshots path],[/mnt/solana/accounts])
+# ARG_OPTIONAL_SINGLE([mount-base-path],[],[Solana client mount base path],[/mnt/solana])
 # ARG_OPTIONAL_SINGLE([log-level],[],[Solana client log level],[WARN])
 # ARG_OPTIONAL_SINGLE([ramdisk-size-gb],[],[Solana client ram disk size],[400])
 # ARG_OPTIONAL_SINGLE([swap-file-size-gb],[],[Solana client swap file size],[512])
@@ -52,7 +52,7 @@ _arg_vote_account_pubkey="AiDoLYTz5CVN3ZLzqDWRtaGUaHGzDnWMeC6KCNYJPqFX"
 _arg_cluster="mainnet-beta"
 _arg_ledger_path="/mnt/solana/ledger"
 _arg_snapshots_path="/mnt/solana/snapshots"
-_arg_accounts_path="/mnt/solana/accounts"
+_arg_mount_base_path="/mnt/solana"
 _arg_log_level="WARN"
 _arg_ramdisk_size_gb="420"
 _arg_swap_file_size_gb="512"
@@ -73,11 +73,11 @@ _arg_jito_commission_bps="0"
 print_help()
 {
 	printf '%s\n' "The general script's help msg"
-	printf 'Usage: %s [-c|--cluster <arg>] [-l|--ledger-path <arg>] [--snapshots-path <arg>] [--accounts-path <arg>] [--log-level <arg>] [--ramdisk-size-gb <arg>] [--swap-file-size-gb <arg>] [--secrets-path <arg>] [--solana-user <arg>] [--solana-version <arg>] [--use-ramdisk-for-account <arg>] [--jito-enable <arg>] [--jito-block-engine-url <arg>] [--jito-relayer-url <arg>] [--jito-receiver-addr <arg>] [--jito-tip-payment-program-pubkey <arg>] [--jito-distribution-program-pubkey <arg>] [--jito-merkle-root-upload-authority <arg>] [--jito-commission-bps <arg>] [-h|--help]\n' "$0"
+	printf 'Usage: %s [-c|--cluster <arg>] [-l|--ledger-path <arg>] [--snapshots-path <arg>] [--mount-base-path <arg>] [--log-level <arg>] [--ramdisk-size-gb <arg>] [--swap-file-size-gb <arg>] [--secrets-path <arg>] [--solana-user <arg>] [--solana-version <arg>] [--use-ramdisk-for-account <arg>] [--jito-enable <arg>] [--jito-block-engine-url <arg>] [--jito-relayer-url <arg>] [--jito-receiver-addr <arg>] [--jito-tip-payment-program-pubkey <arg>] [--jito-distribution-program-pubkey <arg>] [--jito-merkle-root-upload-authority <arg>] [--jito-commission-bps <arg>] [-h|--help]\n' "$0"
 	printf '\t%s\n' "-c, --cluster: Solana cluster (default: '$_arg_cluster')"
 	printf '\t%s\n' "-l, --ledger-path: Solana client ledger path (default: '$_arg_ledger_path')"
 	printf '\t%s\n' "--snapshots-path: Solana client snapshots path (default: '$_arg_snapshots_path')"
-#	printf '\t%s\n' "--accounts-path: Solana client snapshots path (default: '$_arg_accounts_path')" # computed based on --use-ramdisk-for-account
+	printf '\t%s\n' "--mount-base-path: Solana client mount base path (default: '$_arg_mount_base_path')"
 	printf '\t%s\n' "--log-level: Solana client log level (default: '$_arg_log_level')"
 	printf '\t%s\n' "--ramdisk-size-gb: Solana client ram disk size (default: '$_arg_ramdisk_size_gb')"
 	printf '\t%s\n' "--swap-file-size-gb: Solana client swap file size (default: '$_arg_swap_file_size_gb')"
@@ -133,13 +133,13 @@ parse_commandline()
 			--snapshots-path=*)
 				_arg_snapshots_path="${_key##--snapshots-path=}"
 				;;
-			--accounts-path)
+			--mount-base-path)
 				test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
-				_arg_accounts_path="$2"
+				_arg_mount_base_path="$2"
 				shift
 				;;
-			--accounts-path=*)
-				_arg_accounts_path="${_key##--accounts-path=}"
+			--mount-base-path=*)
+				_arg_mount_base_path="${_key##--mount-base-path=}"
 				;;
 			--log-level)
 				test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
@@ -291,6 +291,7 @@ init_validator () {
     --limit localhost  playbooks/bootstrap_validator.yaml \
     --extra-vars "{ \
     'vote_account_pubkey': $_arg_vote_account_pubkey, \
+    'mount_base_path': $_arg_mount_base_path, \
     'ledger_path': $_arg_ledger_path, \
     'log_level': $_arg_log_level, \
     'ramdisk_size_gb': $_arg_ramdisk_size_gb, \
