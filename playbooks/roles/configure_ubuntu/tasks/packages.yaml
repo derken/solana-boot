@@ -32,5 +32,6 @@
       - llvm
       - libprotobuf-dev
       - protobuf-compiler
+      - libudev-dev  
   tags:
     - config.packages
