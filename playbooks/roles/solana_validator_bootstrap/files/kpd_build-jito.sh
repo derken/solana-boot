@@ -5,7 +5,7 @@ echo "TAG=$TAG"
 
 echo Check if required packages are installed.
 
-packages=("libssl-dev" "libudev-dev" "pkg-config" "zlib1g-dev" "llvm" "clang" "cmake" "make" "libprotobuf-dev" "protobuf-compiler")
+packages=("libssl-dev" "libudev-dev" "pkg-config" "zlib1g-dev" "llvm" "clang" "cmake" "make" "libprotobuf-dev" "protobuf-compiler" "libclang-dev")
 missing_packages=()
 
 for package in "${packages[@]}"
