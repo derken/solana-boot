@@ -33,5 +33,6 @@
       - libprotobuf-dev
       - protobuf-compiler
       - libudev-dev  
+      - libclang-dev
   tags:
     - config.packages
