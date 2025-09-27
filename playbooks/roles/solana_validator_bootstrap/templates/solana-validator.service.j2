@@ -9,6 +9,7 @@ Restart=always
 RestartSec=1
 User={{ solana_user }}
 LimitNOFILE=1024000
+LimitMEMLOCK=2000000000
 Environment="PATH=/bin:/usr/bin:{{ env_path }}"
 #Environment="SOLANA_METRICS_CONFIG=host={{ solana_metrics_url }}"
 {% if jito_enable %}
