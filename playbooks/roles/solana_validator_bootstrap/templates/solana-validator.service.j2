@@ -10,6 +10,9 @@ RestartSec=1
 User={{ solana_user }}
 LimitNOFILE=1024000
 LimitMEMLOCK=2000000000
+AmbientCapabilities=CAP_NET_RAW CAP_BPF CAP_NET_ADMIN
+CapabilityBoundingSet=CAP_NET_RAW CAP_BPF CAP_NET_ADMIN
+NoNewPrivileges=no
 Environment="PATH=/bin:/usr/bin:{{ env_path }}"
 #Environment="SOLANA_METRICS_CONFIG=host={{ solana_metrics_url }}"
 {% if jito_enable %}
@@ -49,7 +52,10 @@ ExecStart={{ env_path }}/agave-validator \
 --block-engine-url ${BLOCK_ENGINE_URL} \
 --shred-receiver-address ${SHRED_RECEIVER_ADDR} \
 {% endif %}
---expected-shred-version {{ expected_shred_version }}
+--expected-shred-version {{ expected_shred_version }} \
+--experimental-retransmit-xdp-cpu-cores 1 \
+--experimental-retransmit-xdp-zero-copy \
+--experimental-poh-pinned-cpu-core 10
 
 [Install]
 WantedBy=multi-user.target

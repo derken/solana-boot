@@ -50,6 +50,7 @@ if git tag --list | grep "$TAG"; then
   echo "updating symlinks for active_release..."
   rm -rf "$HOME"/.local/share/solana/install/active_release
   ln -sf "$HOME"/.local/share/solana/install/releases/"$TAG" "$HOME"/.local/share/solana/install/active_release
+  echo "run ubuntu@$ sudo setcap cap_net_raw,cap_bpf,cap_net_admin=p `which agave-validator`"
 else
   echo "invalid git tag: $TAG  hint: git tag|grep jito|sort -V"
 fi
