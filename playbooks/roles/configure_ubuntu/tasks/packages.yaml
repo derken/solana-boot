@@ -24,6 +24,7 @@
       - update-motd
       - btop
       - smartmontools
+      - nvme-cli
       - net-tools
       - cmake
       - clang
