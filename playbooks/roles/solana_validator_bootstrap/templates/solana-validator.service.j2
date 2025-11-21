@@ -10,8 +10,8 @@ RestartSec=1
 User={{ solana_user }}
 LimitNOFILE=1024000
 LimitMEMLOCK=2000000000
-AmbientCapabilities=CAP_NET_RAW CAP_BPF CAP_NET_ADMIN
-CapabilityBoundingSet=CAP_NET_RAW CAP_BPF CAP_NET_ADMIN
+AmbientCapabilities=CAP_NET_RAW CAP_BPF CAP_NET_ADMIN CAP_PERFMON
+CapabilityBoundingSet=CAP_NET_RAW CAP_BPF CAP_NET_ADMIN CAP_PERFMON
 NoNewPrivileges=no
 Environment="PATH=/bin:/usr/bin:{{ env_path }}"
 #Environment="SOLANA_METRICS_CONFIG=host={{ solana_metrics_url }}"
