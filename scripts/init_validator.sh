@@ -17,6 +17,7 @@
 # ARG_OPTIONAL_SINGLE([jito-enable],[],[Enable Jito configuration],[False])
 # ARG_OPTIONAL_SINGLE([jito-block-engine-url],[],[Jito block engine URL],[])
 # ARG_OPTIONAL_SINGLE([jito-relayer-url],[],[Jito relayer URL],[])
+# ARG_OPTIONAL_SINGLE([jito-bam-url],[],[Jito bam URL],[])
 # ARG_OPTIONAL_SINGLE([jito-receiver-addr],[],[Jito reciver address],[])
 # ARG_OPTIONAL_SINGLE([jito-tip-payment-program-pubkey],[],[Jito tip payment program pubkey],[])
 # ARG_OPTIONAL_SINGLE([jito-distribution-program-pubkey],[],[Jito distribution program pubkey],[])
@@ -63,6 +64,7 @@ _arg_use_ramdisk_for_account="False"
 _arg_jito_enable="True"
 _arg_jito_block_engine_url=
 _arg_jito_relayer_url=
+_arg_jito_bam_url=
 _arg_jito_receiver_addr=
 _arg_jito_tip_payment_program_pubkey="T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt"
 _arg_jito_distribution_program_pubkey="4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7"
@@ -73,7 +75,7 @@ _arg_jito_commission_bps="0"
 print_help()
 {
 	printf '%s\n' "The general script's help msg"
-	printf 'Usage: %s [-c|--cluster <arg>] [-l|--ledger-path <arg>] [--snapshots-path <arg>] [--mount-base-path <arg>] [--log-level <arg>] [--ramdisk-size-gb <arg>] [--swap-file-size-gb <arg>] [--secrets-path <arg>] [--solana-user <arg>] [--solana-version <arg>] [--use-ramdisk-for-account <arg>] [--jito-enable <arg>] [--jito-block-engine-url <arg>] [--jito-relayer-url <arg>] [--jito-receiver-addr <arg>] [--jito-tip-payment-program-pubkey <arg>] [--jito-distribution-program-pubkey <arg>] [--jito-merkle-root-upload-authority <arg>] [--jito-commission-bps <arg>] [-h|--help]\n' "$0"
+	printf 'Usage: %s [-c|--cluster <arg>] [-l|--ledger-path <arg>] [--snapshots-path <arg>] [--mount-base-path <arg>] [--log-level <arg>] [--ramdisk-size-gb <arg>] [--swap-file-size-gb <arg>] [--secrets-path <arg>] [--solana-user <arg>] [--solana-version <arg>] [--use-ramdisk-for-account <arg>] [--jito-enable <arg>] [--jito-block-engine-url <arg>] [--jito-relayer-url <arg>] [--jito-bam-url <arg>] [--jito-receiver-addr <arg>] [--jito-tip-payment-program-pubkey <arg>] [--jito-distribution-program-pubkey <arg>] [--jito-merkle-root-upload-authority <arg>] [--jito-commission-bps <arg>] [-h|--help]\n' "$0"
 	printf '\t%s\n' "-c, --cluster: Solana cluster (default: '$_arg_cluster')"
 	printf '\t%s\n' "-l, --ledger-path: Solana client ledger path (default: '$_arg_ledger_path')"
 	printf '\t%s\n' "--snapshots-path: Solana client snapshots path (default: '$_arg_snapshots_path')"
@@ -88,6 +90,7 @@ print_help()
 	printf '\t%s\n' "--jito-enable: Enable Jito configuration (default: '$_arg_jito_enable')"
 	printf '\t%s\n' "--jito-block-engine-url: Jito block engine URL (no default)"
 	printf '\t%s\n' "--jito-relayer-url: Jito relayer URL (no default)"
+	printf '\t%s\n' "--jito-bam-url: Jito BAM URL (no default)"
 	printf '\t%s\n' "--jito-receiver-addr: Jito reciver address (no default)"
 	printf '\t%s\n' "--jito-tip-payment-program-pubkey: Jito tip payment program pubkey (default: '$_arg_jito_tip_payment_program_pubkey')"
 	printf '\t%s\n' "--jito-distribution-program-pubkey: Jito distribution program pubkey (default: '$_arg_jito_distribution_program_pubkey')"
@@ -221,6 +224,14 @@ parse_commandline()
 			--jito-relayer-url=*)
 				_arg_jito_relayer_url="${_key##--jito-relayer-url=}"
 				;;
+			--jito-bam-url)
+				test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+				_arg_jito_bam_url="$2"
+				shift
+				;;
+			--jito-bam-url=*)
+				_arg_jito_bam_url="${_key##--jito-bam-url=}"
+				;;
 			--jito-receiver-addr)
 				test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
 				_arg_jito_receiver_addr="$2"
@@ -304,6 +315,7 @@ init_validator () {
     'jito_enable': $_arg_jito_enable, \
     'jito_block_engine_url': $_arg_jito_block_engine_url, \
     'jito_relayer_url': $_arg_jito_relayer_url, \
+    'jito_bam_url': $_arg_jito_bam_url, \
     'jito_receiver_addr': $_arg_jito_receiver_addr, \
     'jito_tip_payment_program_pubkey': $_arg_jito_tip_payment_program_pubkey, \
     'jito_distribution_program_pubkey': $_arg_jito_distribution_program_pubkey, \

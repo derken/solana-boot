@@ -19,6 +19,7 @@ Environment="RUST_LOG=info,solana_metrics=warn"
 {% if jito_enable %}
 Environment="BLOCK_ENGINE_URL={{ jito_block_engine_url }}"
 Environment="RELAYER_URL={{ jito_relayer_url }}"
+Environment="BAM_URL={{ jito_bam_url }}"
 Environment="SHRED_RECEIVER_ADDR={{ jito_receiver_addr }}"
 {% endif %}
 ExecStart={{ env_path }}/agave-validator \
@@ -50,6 +51,7 @@ ExecStart={{ env_path }}/agave-validator \
 --merkle-root-upload-authority {{ jito_merkle_root_upload_authority }} \
 --commission-bps {{ jito_commission_bps }} \
 --relayer-url ${RELAYER_URL} \
+--bam-url ${BAM_URL} \
 --block-engine-url ${BLOCK_ENGINE_URL} \
 --shred-receiver-address ${SHRED_RECEIVER_ADDR} \
 {% endif %}
