@@ -12,7 +12,7 @@
 # ARG_OPTIONAL_SINGLE([swap-file-size-gb],[],[Solana client swap file size],[512])
 # ARG_OPTIONAL_SINGLE([secrets-path],[],[Solana client secrets path],[/home/solana/.secrets])
 # ARG_OPTIONAL_SINGLE([solana-user],[],[Solana client user],[solana])
-# ARG_OPTIONAL_SINGLE([solana-version],[],[Solana client version],[1.13.6])
+# ARG_OPTIONAL_SINGLE([solana-version],[],[Solana client version],[3.1.8])
 # ARG_OPTIONAL_SINGLE([use-ramdisk-for-account],[],[Put accounts in ramdisk],[False])
 # ARG_OPTIONAL_SINGLE([jito-enable],[],[Enable Jito configuration],[False])
 # ARG_OPTIONAL_SINGLE([jito-block-engine-url],[],[Jito block engine URL],[])
@@ -59,7 +59,7 @@ _arg_ramdisk_size_gb="420"
 _arg_swap_file_size_gb="512"
 _arg_secrets_path="/home/solana/.secrets"
 _arg_solana_user="solana"
-_arg_solana_version="2.0.19"
+_arg_solana_version="3.1.8"
 _arg_use_ramdisk_for_account="False"
 _arg_jito_enable="True"
 _arg_jito_block_engine_url=
