@@ -68,7 +68,7 @@ _arg_jito_bam_url=
 _arg_jito_receiver_addr=
 _arg_jito_tip_payment_program_pubkey="T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt"
 _arg_jito_distribution_program_pubkey="4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7"
-_arg_jito_merkle_root_upload_authority="GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib"
+_arg_jito_merkle_root_upload_authority="8F4jGUmxF36vQ6yabnsxX6AQVXdKBhs8kGSUuRKSg8Xt"
 _arg_jito_commission_bps="0"
 
 
